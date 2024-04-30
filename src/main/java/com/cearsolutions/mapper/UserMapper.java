@@ -1,10 +1,14 @@
 package com.cearsolutions.mapper;
 
+import com.cearsolutions.dto.request.UpdateUserRequestDto;
 import com.cearsolutions.dto.request.UserRequestDto;
 import com.cearsolutions.dto.response.UserResponseDto;
 import com.cearsolutions.model.User;
+import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 /**
  * {@link UserMapper}
@@ -19,4 +23,7 @@ public interface UserMapper {
 
   @Mapping(target = "id", ignore = true)
   User toEntity(UserRequestDto userRequestDto);
+
+  @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+  void updateEntity(@MappingTarget User user, UpdateUserRequestDto userRequestDto);
 }

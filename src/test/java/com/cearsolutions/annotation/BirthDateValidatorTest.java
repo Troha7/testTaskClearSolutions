@@ -57,17 +57,6 @@ public class BirthDateValidatorTest {
     assertTrue(isValid);
   }
 
-  @DisplayName("BirthDateValidator should fail validator when user input null")
-  @Test
-  public void shouldFailValidator_whenUserInputNull() {
-
-    // When
-    var isValid = birthDateValidator.isValid(null, context);
-
-    // Then
-    assertFalse(isValid);
-  }
-
   @DisplayName("BirthDateValidator should fail validator when user birth date later than current date")
   @Test
   public void shouldFailValidator_whenUserBirthDateLaterCurrentDate() {

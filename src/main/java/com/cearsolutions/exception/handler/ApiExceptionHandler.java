@@ -2,9 +2,13 @@ package com.cearsolutions.exception.handler;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.CONFLICT;
+import static org.springframework.http.HttpStatus.FORBIDDEN;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 import com.cearsolutions.dto.response.ApiErrorResponseDto;
+import com.cearsolutions.exception.DateSearchException;
 import com.cearsolutions.exception.EmailNotUniqException;
+import com.cearsolutions.exception.UserNotFoundException;
 import java.util.List;
 import java.util.Objects;
 import org.springframework.http.HttpHeaders;
@@ -32,6 +36,18 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
   @ExceptionHandler(EmailNotUniqException.class)
   public ApiErrorResponseDto<String> handleConflictException(RuntimeException exception) {
     return new ApiErrorResponseDto<>(CONFLICT, exception.getMessage());
+  }
+
+  @ResponseStatus(NOT_FOUND)
+  @ExceptionHandler(UserNotFoundException.class)
+  public ApiErrorResponseDto<String> handleNotFoundException(RuntimeException exception) {
+    return new ApiErrorResponseDto<>(NOT_FOUND, exception.getMessage());
+  }
+
+  @ResponseStatus(FORBIDDEN)
+  @ExceptionHandler(DateSearchException.class)
+  public ApiErrorResponseDto<String> handleForbiddenException(RuntimeException exception) {
+    return new ApiErrorResponseDto<>(FORBIDDEN, exception.getMessage());
   }
 
   @Override

@@ -25,10 +25,7 @@ public class BirthDateValidator implements ConstraintValidator<BirthDateValidati
     context.disableDefaultConstraintViolation();
 
     if (birthDate == null) {
-      context
-          .buildConstraintViolationWithTemplate("Birth date should not be null")
-          .addConstraintViolation();
-      return false;
+      return true;
     } else if (!birthDate.isBefore(LocalDate.now())) {
       context
           .buildConstraintViolationWithTemplate("The birth date must be earlier than current date")
